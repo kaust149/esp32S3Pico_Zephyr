@@ -8,6 +8,7 @@
 #include <stdlib.h>
 #include <zephyr/sys/atomic.h>
 #include <zephyr/shell/shell.h>
+#include <zephyr/shell/lvgl_shell.h>
 #if defined(CONFIG_SHELL_BACKEND_DUMMY)
 #include <zephyr/shell/shell_dummy.h>
 #endif
@@ -1531,6 +1532,7 @@ const struct shell *shell_backend_get_by_name(const char *backend_name)
 void shell_vfprintf(const struct shell *sh, enum shell_vt100_color color,
 		   const char *fmt, va_list args)
 {
+	size_t count = 0;
 	__ASSERT_NO_MSG(sh);
 	__ASSERT(!k_is_in_isr(), "Thread context required.");
 	__ASSERT_NO_MSG(sh->ctx);
@@ -1552,7 +1554,11 @@ void shell_vfprintf(const struct shell *sh, enum shell_vt100_color color,
 	if (!z_flag_cmd_ctx_get(sh) && !sh->ctx->bypass && z_flag_use_vt100_get(sh)) {
 		z_shell_cmd_line_erase(sh);
 	}
+
+	lvgl_shell_write(fmt,args,color);
+	
 	z_shell_vfprintf(sh, color, fmt, args);
+	
 	if (!z_flag_cmd_ctx_get(sh) && !sh->ctx->bypass && z_flag_use_vt100_get(sh)) {
 		z_shell_print_prompt_and_cmd(sh);
 	}

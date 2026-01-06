@@ -9,6 +9,7 @@ zephyr_sources_ifdef(
   shell_fprintf.c
   shell_utils.c
   shell_ops.c
+  lvgl_shell.c
   )
 
 if(NOT CONFIG_SHELL_LOG_BACKEND_CUSTOM)
