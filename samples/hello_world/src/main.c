@@ -16,8 +16,7 @@
 #include "keyboard.h"
 
 #include <lvgl.h>
-#include "terminal.h"
-
+#include <zephyr/shell/lvgl_shell.h>
 #include <lvgl_input_device.h>
 
 #include <zephyr/shell/shell.h>

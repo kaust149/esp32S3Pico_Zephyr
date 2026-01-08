@@ -1,7 +1,6 @@
 #include <zephyr/shell/shell.h>
 #include "ui_shell.h"
-#include "terminal.h"
-// struct shell shell_ui;
+#include <zephyr/shell/lvgl_shell.h>
 #define SHELL_DEFAULT_BACKEND_CONFIG_FLAGS                              \
 {                                                                       \
         .insert_mode    = 0,                                            \
