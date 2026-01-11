@@ -38,6 +38,12 @@ and the documentation's `Getting Started Guide`_ to start developing.
 
 .. start_include_here
 
+
+Getting Started For Esp32 PicoCalc
+***************
+Code is edited in Hello World example and dtsi and dst are changed for esp32s3_devkitc_procpu.dts and esp32s3_devkitc-pinctrl.dtsi
+west build -b esp32s3_devkitc/esp32s3/procpu -S flash-16M -S psram-2M --sysbuild samples/hello_world --pristine
+
 Community Support
 *****************
 
