@@ -18,7 +18,6 @@
 
 #include "keyboard.h"
 #include "southbridge.h"
-#include "picocalc.h"
 volatile bool user_interrupt;
 keyboard_key_available_callback_t keyboard_key_available_callback = NULL;
 
@@ -32,7 +31,6 @@ static bool key_alt = false;     // alt key state
 static volatile char rx_buffer[KBD_BUFFER_SIZE];
 static volatile uint16_t rx_head = 0;
 static volatile uint16_t rx_tail = 0;
-static repeating_timer_t key_timer;
 
 //
 //  Keyboard Driver
@@ -120,18 +118,6 @@ void keyboard_poll()
 
 }
 
-static bool on_keyboard_timer(repeating_timer_t *rt)
-{
-    if (!sb_available())
-    {
-        return true; // if southbridge is not available, skip this timer tick
-    }
-
-    keyboard_poll();
-
-    return true; // continue the timer
-}
-
 //
 // Keyboard API
 //
@@ -163,21 +149,6 @@ void keyboard_set_key_available_callback(keyboard_key_available_callback_t callb
     keyboard_key_available_callback = callback;
 }
 
-
-void keyboard_set_background_poll(bool enable)
-{
-    if (enable)
-    {
-        // Start the repeating timer to poll the keyboard
-        // poll every 100 ms for key events
-        // add_repeating_timer_ms(-KEYBOARD_POLL_MS, on_keyboard_timer, NULL, &key_timer);
-    }
-    else
-    {
-        // Stop the repeating timer
-        // cancel_repeating_timer(&key_timer);
-    }
-}
 
 //
 //  Initialize the keyboard driver
