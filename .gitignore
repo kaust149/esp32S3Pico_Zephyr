@@ -123,3 +123,6 @@ ZephyrModuleFile.txt
 
 # Node dependecies
 node_modules
+epsilon_zephyr/epsilon_sources.cmake
+epsilon_zephyr/generated/
+build/

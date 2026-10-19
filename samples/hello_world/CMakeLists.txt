@@ -2,6 +2,12 @@
 
 cmake_minimum_required(VERSION 3.20.0)
 
+# Optional: NumWorks Epsilon module. Set EPSILON_MODULE_DIR to the module folder
+# and CONFIG_EPSILON=y in prj.conf (see the module's README).
+if(DEFINED ENV{EPSILON_MODULE_DIR})
+  list(APPEND ZEPHYR_EXTRA_MODULES $ENV{EPSILON_MODULE_DIR})
+endif()
+
 find_package(Zephyr REQUIRED HINTS $ENV{ZEPHYR_BASE})
 project(hello_world)
 

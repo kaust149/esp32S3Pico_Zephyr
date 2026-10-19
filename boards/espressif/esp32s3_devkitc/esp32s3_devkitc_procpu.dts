@@ -22,8 +22,8 @@
 
 	chosen {
 		zephyr,sram = &sram1;
-		zephyr,shell-uart = &uart0;
-		zephyr,console = &uart0;
+		zephyr,shell-uart = &usb_serial;
+		zephyr,console = &usb_serial;
 		zephyr,flash = &flash0;
 		zephyr,code-partition = &slot0_partition;
 		zephyr,display = &ili9341;
@@ -55,10 +55,10 @@
 		#size-cells = <0>;
 
 		ili9341: ili9341@0 {
-			compatible = "ilitek,ili9341";
+			compatible = "ilitek,ili9488";
 			mipi-max-frequency = <8000000>;
 			reg = <0>;
-			pixel-format = <1>;
+			pixel-format = <0>;
 			rotation = <0>;
 			width = <320>;
 			height = <320>;
@@ -66,8 +66,9 @@
 	};
 };
 
+/* Console over the native USB port (same cable used for flashing). */
 &usb_serial {
-	status = "disabled";
+	status = "okay";
 };
 
 &uart0 {

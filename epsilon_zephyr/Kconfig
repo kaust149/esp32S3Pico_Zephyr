@@ -1,0 +1,10 @@
+# NumWorks Epsilon as a Zephyr module.
+#
+# Epsilon is compiled from a checkout you provide (see scripts/epsilon_prepare.py).
+# The application also needs: CONFIG_CPP=y, CONFIG_STD_CPP23=y, CONFIG_GLIBCXX_LIBCPP=y.
+
+config EPSILON
+	bool "NumWorks Epsilon calculator OS"
+	help
+	  Build Epsilon with an Ion backend for the PicoCalc. Requires epsilon_sources.cmake,
+	  produced by scripts/epsilon_prepare.py.
